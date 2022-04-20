@@ -12,7 +12,7 @@ and the Flutter guide for
 -->
 
 This package is a pure Dart SDK wrapper for the Strike APIs.
-Strike APIs enable you to accept payments securely and integrate your app with Strike.
+Strike APIs enable you to accept payments securely and integrate your app with [Strike](https://strike.me/en/).
 
 ## Features
 
@@ -20,6 +20,23 @@ Strike APIs enable you to accept payments securely and integrate your app with S
 * Issue new invoices
 * Issue quotes for invoices
 * Cancel unpaid invoices
+
+## Roadmap
+
+- [x] Find user profiles by handle
+- [x] Find user profiles by ID
+- [x] Issue basic invoice 
+- [x] Issue invoice to specific receiver
+- [x] Find invoice by ID
+- [x] Cancel unpaid invoice
+- [ ] Get currency exchange rates
+- [ ] Get webhook events
+- [ ] Find webhook events by ID
+- [ ] Get webhook subscriptions
+- [ ] Create new webhook subscriptions
+- [ ] Find webhook subscription by ID
+- [ ] Update webhook subscription
+- [ ] Delete webhook subscription
 
 ## Getting started
 
