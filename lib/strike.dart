@@ -237,7 +237,21 @@ class Strike {
   }
 
   Future<Profile?> getProfileById({required String id}) async {
-    http.Response response = await get(strikeEndpoint: endpoints[StrikeEndpoint.invoices]! + '/$id');
+    http.Response response = await get(strikeEndpoint: endpoints[StrikeEndpoint.accounts]! + '/$id/profile');
+
+    try {
+      final Profile profile = Profile.fromJson(jsonDecode(response.body));
+
+      return profile;
+    } catch (e) {
+      debugPrint('Strike Error: ' + e.toString());
+    }
+
+    return null;
+  }
+
+  Future<Profile?> getProfileByHandle({required String handle}) async {
+    http.Response response = await get(strikeEndpoint: endpoints[StrikeEndpoint.accounts]! + '/handle/$handle/profile');
 
     try {
       final Profile profile = Profile.fromJson(jsonDecode(response.body));

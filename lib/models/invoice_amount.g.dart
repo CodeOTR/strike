@@ -8,12 +8,12 @@ part of 'invoice_amount.dart';
 
 InvoiceAmount _$InvoiceAmountFromJson(Map<String, dynamic> json) =>
     InvoiceAmount(
-      currency: json['currency'] as String?,
+      currency: getCurrencyTypeFromString(json['currency'] as String?),
       amount: getDoubleFromString(json['amount'] as String?),
     );
 
 Map<String, dynamic> _$InvoiceAmountToJson(InvoiceAmount instance) =>
     <String, dynamic>{
-      'currency': instance.currency,
+      'currency': getStringFromCurrencyType(instance.currency),
       'amount': getStringFromDouble(instance.amount),
     };

@@ -7,14 +7,14 @@ part of 'currency.dart';
 // **************************************************************************
 
 Currency _$CurrencyFromJson(Map<String, dynamic> json) => Currency(
-      currency: json['currency'] as String?,
+      currency: getCurrencyTypeFromString(json['currency'] as String?),
       isDefaultCurrency: json['isDefaultCurrency'] as bool?,
       isAvailable: json['isAvailable'] as bool?,
       isInvoiceable: json['isInvoiceable'] as bool?,
     );
 
 Map<String, dynamic> _$CurrencyToJson(Currency instance) => <String, dynamic>{
-      'currency': instance.currency,
+      'currency': getStringFromCurrencyType(instance.currency),
       'isDefaultCurrency': instance.isDefaultCurrency,
       'isAvailable': instance.isAvailable,
       'isInvoiceable': instance.isInvoiceable,

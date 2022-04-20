@@ -1,4 +1,5 @@
 import 'package:json_annotation/json_annotation.dart';
+import 'package:strike/models/currency.dart';
 import 'package:strike/utilities/json_utilities.dart';
 
 part 'conversion_rate.g.dart';
@@ -9,9 +10,11 @@ class ConversionRate {
   @JsonKey(fromJson: getDoubleFromString, toJson: getStringFromDouble)
   double? amount;
 
-  String? sourceCurrency;
+  @JsonKey(fromJson: getCurrencyTypeFromString, toJson: getStringFromCurrencyType)
+  CurrencyType? sourceCurrency;
 
-  String? targetCurrency;
+  @JsonKey(fromJson: getCurrencyTypeFromString, toJson: getStringFromCurrencyType)
+  CurrencyType? targetCurrency;
 
   ConversionRate({
     this.amount,

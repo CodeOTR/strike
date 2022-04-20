@@ -1,12 +1,13 @@
 import 'package:json_annotation/json_annotation.dart';
+import 'package:strike/models/currency.dart';
 import 'package:strike/utilities/json_utilities.dart';
 
 part 'invoice_amount.g.dart';
 
 @JsonSerializable(explicitToJson: true)
 class InvoiceAmount {
-  /// USD, BTC, EUR, USDT, GBP
-  String? currency;
+  @JsonKey(fromJson: getCurrencyTypeFromString, toJson: getStringFromCurrencyType)
+  CurrencyType? currency;
 
   @JsonKey(fromJson: getDoubleFromString, toJson: getStringFromDouble)
   double? amount;
