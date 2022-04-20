@@ -12,10 +12,12 @@ class Strike {
   Strike({
     required this.apiKey,
     this.extraHeaders = const {},
+    this.debugMode = false,
   });
 
   final String apiKey;
   final Map<String, String> extraHeaders;
+  final bool debugMode;
 
   var client = http.Client();
 
@@ -34,7 +36,6 @@ class Strike {
   }
 
   Future<http.Response> get(StrikeEndpoint strikeEndpoint) async {
-
     String endpoint = _host + endpoints[strikeEndpoint]!;
 
     final response = await http.get(
@@ -48,7 +49,6 @@ class Strike {
   }
 
   Future<http.Response> post(StrikeEndpoint strikeEndpoint, Map body) async {
-
     String endpoint = _host + endpoints[strikeEndpoint]!;
 
     final response = await http.post(
@@ -63,7 +63,6 @@ class Strike {
   }
 
   Future<http.Response> put(StrikeEndpoint strikeEndpoint, Map body) async {
-
     String endpoint = _host + endpoints[strikeEndpoint]!;
 
     final response = await http.put(
@@ -78,7 +77,6 @@ class Strike {
   }
 
   Future<http.Response> patch(StrikeEndpoint strikeEndpoint, Map body) async {
-
     String endpoint = _host + endpoints[strikeEndpoint]!;
 
     final response = await http.patch(
@@ -106,12 +104,12 @@ class Strike {
     return response;
   }
 
-  http.Response printResponseData(http.Response response, String endpoint) {
-    debugPrint('Endpoint: ' + endpoint);
-    debugPrint('Status code: ' + response.statusCode.toString());
-    debugPrint('Response body: ' + response.body);
-
-    return response;
+  void printResponseData(http.Response response, String endpoint) {
+    if (debugMode) {
+      debugPrint('Endpoint: ' + endpoint);
+      debugPrint('Status code: ' + response.statusCode.toString());
+      debugPrint('Response body: ' + response.body);
+    }
   }
 
   StrikeSubscription? createNewSubscription() {
