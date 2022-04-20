@@ -46,7 +46,7 @@ class Strike {
     String endpoint = _host + strikeEndpoint;
 
     final response = await http.get(
-      Uri.parse(_host + endpoints[endpoint]!),
+      Uri.parse(endpoint),
       headers: _headers..addAll(extraHeaders ?? {}),
     );
 
@@ -63,7 +63,7 @@ class Strike {
     String endpoint = _host + strikeEndpoint;
 
     final response = await http.post(
-      Uri.parse(_host + endpoints[endpoint]!),
+      Uri.parse(endpoint),
       headers: _headers..addAll(extraHeaders ?? {}),
       body: jsonEncode(body),
     );
@@ -81,7 +81,7 @@ class Strike {
     String endpoint = _host + strikeEndpoint;
 
     final response = await http.put(
-      Uri.parse(_host + endpoints[endpoint]!),
+      Uri.parse(endpoint),
       headers: _headers..addAll(extraHeaders ?? {}),
       body: jsonEncode(body),
     );
@@ -99,7 +99,7 @@ class Strike {
     String endpoint = _host + strikeEndpoint;
 
     final response = await http.patch(
-      Uri.parse(_host + endpoints[endpoint]!),
+      Uri.parse(endpoint),
       headers: _headers..addAll(extraHeaders ?? {}),
       body: jsonEncode(body),
     );
@@ -117,7 +117,7 @@ class Strike {
     String endpoint = _host + strikeEndpoint;
 
     final response = await http.delete(
-      Uri.parse(_host + endpoints[endpoint]!),
+      Uri.parse(endpoint),
       headers: _headers..addAll(extraHeaders ?? {}),
       body: jsonEncode(body),
     );

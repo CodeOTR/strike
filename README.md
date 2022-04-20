@@ -11,29 +11,24 @@ and the Flutter guide for
 [developing packages and plugins](https://flutter.dev/developing-packages). 
 -->
 
-TODO: Put a short description of the package here that helps potential users
-know whether this package might be useful for them.
+This package is a pure Dart SDK wrapper for the Strike APIs.
+Strike APIs enable you to accept payments securely and integrate your app with Strike.
 
 ## Features
 
-TODO: List what your package can do. Maybe include images, gifs, or videos.
+* Find Strike users by ID and handle
+* Issue new invoices
+* Issue quotes for invoices
+* Cancel unpaid invoices
 
 ## Getting started
 
-TODO: List prerequisites and provide or point to information on how to
-start using the package.
+In order to use the Strike API, you will need to [request an API key](https://developer.strike.me/en/).
 
 ## Usage
 
-TODO: Include short and useful examples for package users. Add longer examples
-to `/example` folder. 
-
 ```dart
-const like = 'sample';
+Strike _strike = Strike(apiKey: '<YOUR_API_KEY>');
+
+_strike.getProfileByHandle(handle: 'joemuller');
 ```
-
-## Additional information
-
-TODO: Tell users more about the package: where to find more information, how to 
-contribute to the package, how to file issues, what response they can expect 
-from the package authors, and more.
