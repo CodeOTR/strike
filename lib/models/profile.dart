@@ -1,23 +1,29 @@
 import 'package:json_annotation/json_annotation.dart';
 import 'package:strike/models/currency.dart';
 
-part 'account.g.dart';
+part 'profile.g.dart';
 
 @JsonSerializable(explicitToJson: true)
-class Account {
+class Profile {
   String? handle;
+
+  String? avatarUrl;
+
+  String? description;
 
   bool? canReceive;
 
   List<Currency>? currencies;
 
-  Account({
+  Profile({
     this.handle,
     this.canReceive,
     this.currencies,
+    this.avatarUrl,
+    this.description,
   });
 
-  factory Account.fromJson(Map<String, dynamic> json) => _$AccountFromJson(json);
+  factory Profile.fromJson(Map<String, dynamic> json) => _$ProfileFromJson(json);
 
-  Map<String, dynamic> toJson() => _$AccountToJson(this);
+  Map<String, dynamic> toJson() => _$ProfileToJson(this);
 }

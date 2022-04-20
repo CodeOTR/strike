@@ -1,21 +1,25 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'account.dart';
+part of 'profile.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator
 // **************************************************************************
 
-Account _$AccountFromJson(Map<String, dynamic> json) => Account(
+Profile _$ProfileFromJson(Map<String, dynamic> json) => Profile(
       handle: json['handle'] as String?,
       canReceive: json['canReceive'] as bool?,
       currencies: (json['currencies'] as List<dynamic>?)
           ?.map((e) => Currency.fromJson(e as Map<String, dynamic>))
           .toList(),
+      avatarUrl: json['avatarUrl'] as String?,
+      description: json['description'] as String?,
     );
 
-Map<String, dynamic> _$AccountToJson(Account instance) => <String, dynamic>{
+Map<String, dynamic> _$ProfileToJson(Profile instance) => <String, dynamic>{
       'handle': instance.handle,
+      'avatarUrl': instance.avatarUrl,
+      'description': instance.description,
       'canReceive': instance.canReceive,
       'currencies': instance.currencies?.map((e) => e.toJson()).toList(),
     };
