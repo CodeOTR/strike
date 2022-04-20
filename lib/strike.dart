@@ -35,12 +35,15 @@ class Strike {
     }..addAll(extraHeaders);
   }
 
-  Future<http.Response> get(StrikeEndpoint strikeEndpoint) async {
-    String endpoint = _host + endpoints[strikeEndpoint]!;
+  Future<http.Response> get({
+    required String strikeEndpoint,
+    Map<String, String>? extraHeaders,
+  }) async {
+    String endpoint = _host + strikeEndpoint;
 
     final response = await http.get(
       Uri.parse(_host + endpoints[endpoint]!),
-      headers: _headers,
+      headers: _headers..addAll(extraHeaders ?? {}),
     );
 
     printResponseData(response, endpoint);
@@ -48,12 +51,16 @@ class Strike {
     return response;
   }
 
-  Future<http.Response> post(StrikeEndpoint strikeEndpoint, Map body) async {
-    String endpoint = _host + endpoints[strikeEndpoint]!;
+  Future<http.Response> post({
+    required String strikeEndpoint,
+    Map<String, String>? extraHeaders,
+    Map<String, dynamic>? body,
+  }) async {
+    String endpoint = _host + strikeEndpoint;
 
     final response = await http.post(
       Uri.parse(_host + endpoints[endpoint]!),
-      headers: _headers,
+      headers: _headers..addAll(extraHeaders ?? {}),
       body: body,
     );
 
@@ -62,12 +69,16 @@ class Strike {
     return response;
   }
 
-  Future<http.Response> put(StrikeEndpoint strikeEndpoint, Map body) async {
-    String endpoint = _host + endpoints[strikeEndpoint]!;
+  Future<http.Response> put({
+    required String strikeEndpoint,
+    Map<String, String>? extraHeaders,
+    Map<String, dynamic>? body,
+  }) async {
+    String endpoint = _host + strikeEndpoint;
 
     final response = await http.put(
       Uri.parse(_host + endpoints[endpoint]!),
-      headers: _headers,
+      headers: _headers..addAll(extraHeaders ?? {}),
       body: body,
     );
 
@@ -76,12 +87,16 @@ class Strike {
     return response;
   }
 
-  Future<http.Response> patch(StrikeEndpoint strikeEndpoint, Map body) async {
-    String endpoint = _host + endpoints[strikeEndpoint]!;
+  Future<http.Response> patch({
+    required String strikeEndpoint,
+    Map<String, String>? extraHeaders,
+    Map<String, dynamic>? body,
+  }) async {
+    String endpoint = _host + strikeEndpoint;
 
     final response = await http.patch(
       Uri.parse(_host + endpoints[endpoint]!),
-      headers: _headers,
+      headers: _headers..addAll(extraHeaders ?? {}),
       body: body,
     );
 
@@ -90,12 +105,16 @@ class Strike {
     return response;
   }
 
-  Future<http.Response> delete(StrikeEndpoint strikeEndpoint, Map body) async {
-    String endpoint = _host + endpoints[strikeEndpoint]!;
+  Future<http.Response> delete({
+    required String strikeEndpoint,
+    Map<String, String>? extraHeaders,
+    Map<String, dynamic>? body,
+  }) async {
+    String endpoint = _host + strikeEndpoint;
 
     final response = await http.delete(
       Uri.parse(_host + endpoints[endpoint]!),
-      headers: _headers,
+      headers: _headers..addAll(extraHeaders ?? {}),
       body: body,
     );
 
@@ -113,11 +132,13 @@ class Strike {
   }
 
   StrikeSubscription? createNewSubscription() {
+    return null;
+
     // http.post(url)
   }
 
   Future<List<Invoice>?> getInvoices() async {
-    http.Response response = await get(StrikeEndpoint.invoices);
+    http.Response response = await get(strikeEndpoint: endpoints[StrikeEndpoint.invoices]!);
 
     final List data = jsonDecode(response.body);
 
@@ -135,17 +156,35 @@ class Strike {
     return invoices;
   }
 
-  Future<Invoice?> getInvoice({required String id}) async {
-    http.Response response = await get(StrikeEndpoint.invoices);
+  Future<Invoice?> findInvoiceById({required String id}) async {
+    http.Response response = await get(strikeEndpoint: endpoints[StrikeEndpoint.invoices]! + '/$id');
 
     try {
       final Invoice invoice = Invoice.fromJson(jsonDecode(response.body));
 
-      List<Invoice> invoices = [];
       return invoice;
     } catch (e) {
       debugPrint('Strike Error: ' + e.toString());
     }
+
+    return null;
+  }
+
+  Future<Invoice?> issueInvoice({
+    required String handle,
+    required String description,
+  }) async {
+    http.Response response = await post(strikeEndpoint: endpoints[StrikeEndpoint.invoices]! + '/handle/$handle');
+
+    try {
+      final Invoice invoice = Invoice.fromJson(jsonDecode(response.body));
+
+      return invoice;
+    } catch (e) {
+      debugPrint('Strike Error: ' + e.toString());
+    }
+
+    return null;
   }
 }
 
