@@ -1,7 +1,11 @@
+import 'package:dotenv/dotenv.dart';
 import 'package:flutter/material.dart';
 import 'package:strike/strike.dart';
 
-void main() {
+DotEnv? dotEnv;
+
+Future<void> main() async {
+  dotEnv = DotEnv(includePlatformEnvironment: true)..load(['.env']);
   runApp(const MyApp());
 }
 
@@ -31,7 +35,7 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   final Strike _strike = Strike(
-    apiKey: '<YOUR_API_KEY>',
+    apiKey: dotEnv!['STRIKE_API_KEY']!,
     debugMode: true,
   );
 
@@ -57,7 +61,6 @@ class _MyHomePageState extends State<MyHomePage> {
               },
               child: const Text('Get invoices'),
             ),
-
           ],
         ),
       ),

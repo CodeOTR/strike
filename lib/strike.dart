@@ -39,7 +39,7 @@ class Strike {
     }..addAll(extraHeaders);
   }
 
-  Future<http.Response> get({
+  Future<http.Response> _get({
     required String strikeEndpoint,
     Map<String, String>? extraHeaders,
   }) async {
@@ -55,7 +55,7 @@ class Strike {
     return response;
   }
 
-  Future<http.Response> post({
+  Future<http.Response> _post({
     required String strikeEndpoint,
     Map<String, String>? extraHeaders,
     Map<String, dynamic>? body,
@@ -73,7 +73,7 @@ class Strike {
     return response;
   }
 
-  Future<http.Response> put({
+  Future<http.Response> _put({
     required String strikeEndpoint,
     Map<String, String>? extraHeaders,
     Map<String, dynamic>? body,
@@ -91,7 +91,7 @@ class Strike {
     return response;
   }
 
-  Future<http.Response> patch({
+  Future<http.Response> _patch({
     required String strikeEndpoint,
     Map<String, String>? extraHeaders,
     Map<String, dynamic>? body,
@@ -109,7 +109,7 @@ class Strike {
     return response;
   }
 
-  Future<http.Response> delete({
+  Future<http.Response> _delete({
     required String strikeEndpoint,
     Map<String, String>? extraHeaders,
     Map<String, dynamic>? body,
@@ -142,7 +142,7 @@ class Strike {
   }
 
   Future<List<Invoice>?> getInvoices() async {
-    http.Response response = await get(strikeEndpoint: endpoints[StrikeEndpoint.invoices]!);
+    http.Response response = await _get(strikeEndpoint: endpoints[StrikeEndpoint.invoices]!);
 
     final List data = jsonDecode(response.body);
 
@@ -161,7 +161,7 @@ class Strike {
   }
 
   Future<Invoice?> findInvoiceById({required String id}) async {
-    http.Response response = await get(strikeEndpoint: endpoints[StrikeEndpoint.invoices]! + '/$id');
+    http.Response response = await _get(strikeEndpoint: endpoints[StrikeEndpoint.invoices]! + '/$id');
 
     try {
       final Invoice invoice = Invoice.fromJson(jsonDecode(response.body));
@@ -182,7 +182,7 @@ class Strike {
   }) async {
     String endpoint = endpoints[StrikeEndpoint.invoices]! + (handle != null ? '/handle/$handle' : '');
 
-    http.Response response = await post(
+    http.Response response = await _post(
       strikeEndpoint: endpoint,
       extraHeaders: {
         HttpHeaders.contentTypeHeader: 'application/json',
@@ -202,7 +202,7 @@ class Strike {
   }
 
   Future<Quote?> issueQuoteForInvoice({required String? invoiceId}) async {
-    http.Response response = await post(
+    http.Response response = await _post(
       strikeEndpoint: endpoints[StrikeEndpoint.invoices]! + '/$invoiceId/quote',
       extraHeaders: {
         HttpHeaders.contentLengthHeader: '0',
@@ -221,7 +221,7 @@ class Strike {
   }
 
   Future<Invoice?> cancelUnpaidInvoice({required String? invoiceId}) async {
-    http.Response response = await patch(
+    http.Response response = await _patch(
       strikeEndpoint: endpoints[StrikeEndpoint.invoices]! + '/$invoiceId/cancel',
     );
 
@@ -237,7 +237,7 @@ class Strike {
   }
 
   Future<Profile?> getProfileById({required String id}) async {
-    http.Response response = await get(strikeEndpoint: endpoints[StrikeEndpoint.accounts]! + '/$id/profile');
+    http.Response response = await _get(strikeEndpoint: endpoints[StrikeEndpoint.accounts]! + '/$id/profile');
 
     try {
       final Profile profile = Profile.fromJson(jsonDecode(response.body));
@@ -251,7 +251,7 @@ class Strike {
   }
 
   Future<Profile?> getProfileByHandle({required String handle}) async {
-    http.Response response = await get(strikeEndpoint: endpoints[StrikeEndpoint.accounts]! + '/handle/$handle/profile');
+    http.Response response = await _get(strikeEndpoint: endpoints[StrikeEndpoint.accounts]! + '/handle/$handle/profile');
 
     try {
       final Profile profile = Profile.fromJson(jsonDecode(response.body));
