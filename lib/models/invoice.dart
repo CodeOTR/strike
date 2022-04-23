@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:strike/models/invoice_amount.dart';
 
 import 'package:json_annotation/json_annotation.dart';
@@ -13,7 +14,7 @@ class Invoice {
 
   /// Current state of the invoice
   /// UNPAID, PAID, PENDING, CANCELLED
-  String? state;
+  InvoiceState? state;
 
   @JsonKey(fromJson: getDateFromTimestamp, toJson: getStringFromDateTime)
   DateTime? created;
@@ -42,4 +43,28 @@ class Invoice {
   factory Invoice.fromJson(Map<String, dynamic> json) => _$InvoiceFromJson(json);
 
   Map<String, dynamic> toJson() => _$InvoiceToJson(this);
+}
+
+enum InvoiceState {
+  UNPAID,
+  PAID,
+  PENDING,
+  CANCELLEd,
+}
+
+extension Extension on InvoiceState {
+
+  Color get stateColor {
+    switch (this) {
+
+      case InvoiceState.UNPAID:
+        return Colors.grey;
+      case InvoiceState.PAID:
+        return Colors.green;
+      case InvoiceState.PENDING:
+        return Colors.orange;
+      case InvoiceState.CANCELLEd:
+        return Colors.red;
+    }
+  }
 }

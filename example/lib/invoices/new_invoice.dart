@@ -1,10 +1,12 @@
+import 'package:example/app/widgets.dart';
 import 'package:example/main.dart';
 import 'package:flutter/material.dart';
+import 'package:strike/models/profile_currency.dart';
 import 'package:strike/models/invoice.dart';
 import 'package:strike/models/invoice_amount.dart';
 
 class NewInvoice extends StatefulWidget {
-  NewInvoice({Key? key}) : super(key: key);
+  const NewInvoice({Key? key}) : super(key: key);
 
   @override
   State<NewInvoice> createState() => _NewInvoiceState();
@@ -13,6 +15,8 @@ class NewInvoice extends StatefulWidget {
 class _NewInvoiceState extends State<NewInvoice> {
   final TextEditingController descriptionController = TextEditingController();
   final TextEditingController handleController = TextEditingController();
+
+  CurrencyType? selectedCurrencyType;
 
   @override
   Widget build(BuildContext context) {
@@ -24,6 +28,7 @@ class _NewInvoiceState extends State<NewInvoice> {
         child: Padding(
           padding: const EdgeInsets.all(16.0),
           child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               TextField(
                 decoration: const InputDecoration(hintText: '(Optional) Handle'),
@@ -33,6 +38,27 @@ class _NewInvoiceState extends State<NewInvoice> {
                 decoration: const InputDecoration(hintText: 'Invoice Description'),
                 controller: descriptionController,
               ),
+              gap16,
+              Wrap(
+                alignment: WrapAlignment.start,
+                spacing: 8,
+                children: [
+                  for (CurrencyType type in CurrencyType.values)
+                    InputChip(
+                      selected: type == selectedCurrencyType,
+                      label: Text(type.name),
+                      onPressed: () {
+                        setState(() {
+                          selectedCurrencyType = type;
+                        });
+                      },
+                    )
+                ],
+              ),
+              Align(
+                alignment: Alignment.centerLeft,
+                child: Text(selectedCurrencyType?.longName ?? ''),
+              )
             ],
           ),
         ),
@@ -45,8 +71,8 @@ class _NewInvoiceState extends State<NewInvoice> {
             correlationId: null,
             description: descriptionController.text,
             invoiceAmount: InvoiceAmount(
-              amount: ,
-              currency: ,
+              amount: 10,
+              currency: selectedCurrencyType,
             ),
           );
         },

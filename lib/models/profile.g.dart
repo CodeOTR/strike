@@ -10,7 +10,7 @@ Profile _$ProfileFromJson(Map<String, dynamic> json) => Profile(
       handle: json['handle'] as String?,
       canReceive: json['canReceive'] as bool?,
       currencies: (json['currencies'] as List<dynamic>?)
-          ?.map((e) => Currency.fromJson(e as Map<String, dynamic>))
+          ?.map((e) => ProfileCurrency.fromJson(e as Map<String, dynamic>))
           .toList(),
       avatarUrl: json['avatarUrl'] as String?,
       description: json['description'] as String?,

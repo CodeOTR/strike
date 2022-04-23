@@ -11,7 +11,7 @@ Invoice _$InvoiceFromJson(Map<String, dynamic> json) => Invoice(
       amount: json['amount'] == null
           ? null
           : InvoiceAmount.fromJson(json['amount'] as Map<String, dynamic>),
-      state: json['state'] as String?,
+      state: $enumDecodeNullable(_$InvoiceStateEnumMap, json['state']),
       created: getDateFromTimestamp(json['created']),
       correlationId: json['correlationId'] as String?,
       description: json['description'] as String?,
@@ -22,10 +22,17 @@ Invoice _$InvoiceFromJson(Map<String, dynamic> json) => Invoice(
 Map<String, dynamic> _$InvoiceToJson(Invoice instance) => <String, dynamic>{
       'invoiceId': instance.invoiceId,
       'amount': instance.amount?.toJson(),
-      'state': instance.state,
+      'state': _$InvoiceStateEnumMap[instance.state],
       'created': getStringFromDateTime(instance.created),
       'correlationId': instance.correlationId,
       'description': instance.description,
       'issuerId': instance.issuerId,
       'receiverId': instance.receiverId,
     };
+
+const _$InvoiceStateEnumMap = {
+  InvoiceState.UNPAID: 'UNPAID',
+  InvoiceState.PAID: 'PAID',
+  InvoiceState.PENDING: 'PENDING',
+  InvoiceState.CANCELLEd: 'CANCELLEd',
+};

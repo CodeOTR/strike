@@ -185,7 +185,7 @@ class Strike {
     /// in Strike system with some entity on the integrator side.
     /// Must be a unique value.
     required String? correlationId,
-    required String description,
+    required String? description,
     required InvoiceAmount invoiceAmount,
   }) async {
     String endpoint = endpoints[StrikeEndpoint.invoices]! + (handle != null ? '/handle/$handle' : '');

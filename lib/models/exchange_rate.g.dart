@@ -9,14 +9,22 @@ part of 'exchange_rate.dart';
 ExchangeRate _$ExchangeRateFromJson(Map<String, dynamic> json) => ExchangeRate(
       amount: getDoubleFromString(json['amount'] as String?),
       sourceCurrency:
-          getCurrencyTypeFromString(json['sourceCurrency'] as String?),
+          $enumDecodeNullable(_$CurrencyTypeEnumMap, json['sourceCurrency']),
       targetCurrency:
-          getCurrencyTypeFromString(json['targetCurrency'] as String?),
+          $enumDecodeNullable(_$CurrencyTypeEnumMap, json['targetCurrency']),
     );
 
 Map<String, dynamic> _$ExchangeRateToJson(ExchangeRate instance) =>
     <String, dynamic>{
       'amount': getStringFromDouble(instance.amount),
-      'sourceCurrency': getStringFromCurrencyType(instance.sourceCurrency),
-      'targetCurrency': getStringFromCurrencyType(instance.targetCurrency),
+      'sourceCurrency': _$CurrencyTypeEnumMap[instance.sourceCurrency],
+      'targetCurrency': _$CurrencyTypeEnumMap[instance.targetCurrency],
     };
+
+const _$CurrencyTypeEnumMap = {
+  CurrencyType.BTC: 'BTC',
+  CurrencyType.USD: 'USD',
+  CurrencyType.EUR: 'EUR',
+  CurrencyType.USDT: 'USDT',
+  CurrencyType.GBP: 'GBP',
+};

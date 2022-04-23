@@ -2,7 +2,7 @@ import 'package:example/app/styles.dart';
 import 'package:example/app/widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
-import 'package:strike/models/currency.dart';
+import 'package:strike/models/profile_currency.dart';
 import 'package:strike/models/profile.dart';
 import 'package:strike/strike.dart';
 
@@ -161,7 +161,7 @@ class _UserSearchState extends State<UserSearch> {
                       shrinkWrap: true,
                       itemCount: (profile?.currencies ?? []).length,
                       itemBuilder: (context, index) {
-                        Currency currency = (profile?.currencies ?? [])[index];
+                        ProfileCurrency currency = (profile?.currencies ?? [])[index];
 
                         String features = '';
 

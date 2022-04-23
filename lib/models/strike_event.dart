@@ -7,9 +7,10 @@ part 'strike_event.g.dart';
 class StrikeEvent {
   String? id;
 
+  ///invoice.created or invoice.updated
   String? eventType;
 
-  // v1
+  /// v1
   String? webhookVersion;
 
   @JsonKey(fromJson: getDateFromTimestamp, toJson: getStringFromDateTime)

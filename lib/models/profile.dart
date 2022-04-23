@@ -1,5 +1,5 @@
 import 'package:json_annotation/json_annotation.dart';
-import 'package:strike/models/currency.dart';
+import 'package:strike/models/profile_currency.dart';
 
 part 'profile.g.dart';
 
@@ -13,7 +13,7 @@ class Profile {
 
   bool? canReceive;
 
-  List<Currency>? currencies;
+  List<ProfileCurrency>? currencies;
 
   Profile({
     this.handle,
