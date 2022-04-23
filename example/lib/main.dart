@@ -1,5 +1,5 @@
 import 'package:example/invoices/invoices.dart';
-import 'package:example/invoices/new_invoice.dart';
+import 'package:example/rates/exchange_rates.dart';
 import 'package:example/users/user_search.dart';
 import 'package:flutter/material.dart';
 import 'package:strike/strike.dart';
@@ -7,8 +7,16 @@ import 'package:flutter_dotenv/flutter_dotenv.dart';
 
 DotEnv? dotEnv;
 
+late final Strike strike;
+
 Future<void> main()  async {
   await dotenv.load(fileName: '.env');
+
+  strike = Strike(
+    apiKey: dotenv.env['STRIKE_API_KEY']!,
+    debugMode: true,
+  );
+
   runApp(const MyApp());
 }
 
@@ -39,11 +47,6 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
 
 
-  final Strike _strike = Strike(
-    apiKey: dotenv.env['STRIKE_API_KEY']!,
-    debugMode: true,
-  );
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -64,7 +67,12 @@ class _MyHomePageState extends State<MyHomePage> {
             },
             title: const Text('User Search'),
           ),
-
+          ListTile(
+            onTap: (){
+              Navigator.of(context).push(MaterialPageRoute(builder: (context) => ExchangeRates()));
+            },
+            title: const Text('Exchange Rates'),
+          ),
         ],
       ),
     );

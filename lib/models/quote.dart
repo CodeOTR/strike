@@ -1,5 +1,5 @@
 import 'package:json_annotation/json_annotation.dart';
-import 'package:strike/models/conversion_rate.dart';
+import 'package:strike/models/exchange_rate.dart';
 import 'package:strike/models/invoice_amount.dart';
 import 'package:strike/utilities/json_utilities.dart';
 
@@ -24,7 +24,7 @@ class Quote {
 
   InvoiceAmount? sourceAmount;
 
-  ConversionRate? conversionRate;
+  ExchangeRate? exchangeRate;
 
   Quote({
     this.quoteId,
@@ -35,7 +35,7 @@ class Quote {
     this.expirationInSec,
     this.targetAmount,
     this.sourceAmount,
-    this.conversionRate,
+    this.exchangeRate,
   });
 
   factory Quote.fromJson(Map<String, dynamic> json) => _$QuoteFromJson(json);

@@ -1,26 +1,21 @@
 import 'package:example/invoices/invoice_details.dart';
 import 'package:example/invoices/new_invoice.dart';
+import 'package:example/main.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:strike/models/invoice.dart';
-import 'package:strike/strike.dart';
 
 class Invoices extends StatelessWidget {
   const Invoices({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    final Strike _strike = Strike(
-      apiKey: dotenv.env['STRIKE_API_KEY']!,
-      debugMode: true,
-    );
 
     return Scaffold(
       appBar: AppBar(
         title: const Text('Invoices'),
       ),
       body: FutureBuilder(
-        future: _strike.getInvoices(),
+        future: strike.getInvoices(),
         builder: (BuildContext context, AsyncSnapshot<List<Invoice>?> snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
             return const Center(

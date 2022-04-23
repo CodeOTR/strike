@@ -1,13 +1,12 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'conversion_rate.dart';
+part of 'exchange_rate.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator
 // **************************************************************************
 
-ConversionRate _$ConversionRateFromJson(Map<String, dynamic> json) =>
-    ConversionRate(
+ExchangeRate _$ExchangeRateFromJson(Map<String, dynamic> json) => ExchangeRate(
       amount: getDoubleFromString(json['amount'] as String?),
       sourceCurrency:
           getCurrencyTypeFromString(json['sourceCurrency'] as String?),
@@ -15,7 +14,7 @@ ConversionRate _$ConversionRateFromJson(Map<String, dynamic> json) =>
           getCurrencyTypeFromString(json['targetCurrency'] as String?),
     );
 
-Map<String, dynamic> _$ConversionRateToJson(ConversionRate instance) =>
+Map<String, dynamic> _$ExchangeRateToJson(ExchangeRate instance) =>
     <String, dynamic>{
       'amount': getStringFromDouble(instance.amount),
       'sourceCurrency': getStringFromCurrencyType(instance.sourceCurrency),

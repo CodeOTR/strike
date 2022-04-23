@@ -4,6 +4,7 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:flutter/foundation.dart';
+import 'package:strike/models/exchange_rate.dart';
 import 'package:strike/models/invoice.dart';
 import 'package:strike/models/invoice_amount.dart';
 import 'package:strike/models/profile.dart';
@@ -31,7 +32,8 @@ class Strike {
     StrikeEndpoint.subscriptions: '/subscriptions',
     StrikeEndpoint.invoices: '/invoices',
     StrikeEndpoint.accounts: '/accounts',
-    StrikeEndpoint.events: '/events'
+    StrikeEndpoint.events: '/events',
+    StrikeEndpoint.rates: '/rates/ticker'
   };
 
   Map<String, String> get _headers {
@@ -319,6 +321,27 @@ class Strike {
 
     return null;
   }
+
+  Future<List<ExchangeRate>?> getExchangeRates() async {
+    http.Response response = await _get(strikeEndpoint: endpoints[StrikeEndpoint.rates]!);
+
+    final List data = jsonDecode(response.body);
+
+    List<ExchangeRate> rates = [];
+
+    try {
+      for (var value in data) {
+        ExchangeRate rate = ExchangeRate.fromJson(value);
+        rates.add(rate);
+      }
+
+      return rates;
+    } catch (e) {
+      debugPrint('Strike Error: ' + e.toString());
+    }
+
+    return null;
+  }
 }
 
 enum StrikeEndpoint {
@@ -326,4 +349,5 @@ enum StrikeEndpoint {
   invoices,
   accounts,
   events,
+  rates,
 }

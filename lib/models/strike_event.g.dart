@@ -12,6 +12,7 @@ StrikeEvent _$StrikeEventFromJson(Map<String, dynamic> json) => StrikeEvent(
       webhookVersion: json['webhookVersion'] as String?,
       created: getDateFromTimestamp(json['created']),
       deliverySuccess: json['deliverySuccess'] as bool?,
+      data: json['data'],
     );
 
 Map<String, dynamic> _$StrikeEventToJson(StrikeEvent instance) =>
@@ -21,4 +22,5 @@ Map<String, dynamic> _$StrikeEventToJson(StrikeEvent instance) =>
       'webhookVersion': instance.webhookVersion,
       'created': getStringFromDateTime(instance.created),
       'deliverySuccess': instance.deliverySuccess,
+      'data': instance.data,
     };

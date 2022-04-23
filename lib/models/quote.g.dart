@@ -21,10 +21,9 @@ Quote _$QuoteFromJson(Map<String, dynamic> json) => Quote(
           ? null
           : InvoiceAmount.fromJson(
               json['sourceAmount'] as Map<String, dynamic>),
-      conversionRate: json['conversionRate'] == null
+      exchangeRate: json['exchangeRate'] == null
           ? null
-          : ConversionRate.fromJson(
-              json['conversionRate'] as Map<String, dynamic>),
+          : ExchangeRate.fromJson(json['exchangeRate'] as Map<String, dynamic>),
     );
 
 Map<String, dynamic> _$QuoteToJson(Quote instance) => <String, dynamic>{
@@ -36,5 +35,5 @@ Map<String, dynamic> _$QuoteToJson(Quote instance) => <String, dynamic>{
       'expirationInSec': instance.expirationInSec,
       'targetAmount': instance.targetAmount?.toJson(),
       'sourceAmount': instance.sourceAmount?.toJson(),
-      'conversionRate': instance.conversionRate?.toJson(),
+      'exchangeRate': instance.exchangeRate?.toJson(),
     };

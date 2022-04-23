@@ -2,10 +2,10 @@ import 'package:json_annotation/json_annotation.dart';
 import 'package:strike/models/currency.dart';
 import 'package:strike/utilities/json_utilities.dart';
 
-part 'conversion_rate.g.dart';
+part 'exchange_rate.g.dart';
 
 @JsonSerializable(explicitToJson: true)
-class ConversionRate {
+class ExchangeRate {
 
   @JsonKey(fromJson: getDoubleFromString, toJson: getStringFromDouble)
   double? amount;
@@ -16,13 +16,13 @@ class ConversionRate {
   @JsonKey(fromJson: getCurrencyTypeFromString, toJson: getStringFromCurrencyType)
   CurrencyType? targetCurrency;
 
-  ConversionRate({
+  ExchangeRate({
     this.amount,
     this.sourceCurrency,
     this.targetCurrency,
   });
 
-  factory ConversionRate.fromJson(Map<String, dynamic> json) => _$ConversionRateFromJson(json);
+  factory ExchangeRate.fromJson(Map<String, dynamic> json) => _$ExchangeRateFromJson(json);
 
-  Map<String, dynamic> toJson() => _$ConversionRateToJson(this);
+  Map<String, dynamic> toJson() => _$ExchangeRateToJson(this);
 }
