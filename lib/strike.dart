@@ -180,7 +180,11 @@ class Strike {
 
   Future<Invoice?> issueInvoice({
     required String? handle,
-    required String correlationId,
+
+    /// Correlation id is optional but can be used to link the invoice
+    /// in Strike system with some entity on the integrator side.
+    /// Must be a unique value.
+    required String? correlationId,
     required String description,
     required InvoiceAmount invoiceAmount,
   }) async {
@@ -191,7 +195,11 @@ class Strike {
       extraHeaders: {
         HttpHeaders.contentTypeHeader: 'application/json',
       },
-      body: {'correlationId': correlationId, 'description': description, 'amount': invoiceAmount.toJson()},
+      body: {
+        'correlationId': correlationId,
+        'description': description,
+        'amount': invoiceAmount.toJson(),
+      },
     );
 
     try {

@@ -7,7 +7,14 @@ import 'package:strike/models/profile.dart';
 import 'package:strike/strike.dart';
 
 class UserSearch extends StatefulWidget {
-  UserSearch({Key? key}) : super(key: key);
+  UserSearch({
+    Key? key,
+    this.id,
+    this.handle,
+  }) : super(key: key);
+
+  final String? id;
+  final String? handle;
 
   final Strike _strike = Strike(
     apiKey: dotenv.env['STRIKE_API_KEY']!,
@@ -24,7 +31,34 @@ class _UserSearchState extends State<UserSearch> {
   bool byHandle = true;
 
   @override
-  void initState() {}
+  void initState() {
+    super.initState();
+    if (widget.id != null) {
+      accountController.text = widget.id!;
+      byHandle = false;
+      loadUserById(widget.id!);
+    }
+
+    if (widget.handle != null) {
+      accountController.text = widget.handle!;
+      byHandle = true;
+      loadUserByHandle(widget.handle!);
+    }
+  }
+
+  Future<void> loadUserById(String id) async {
+    Profile? searchProfile =  await widget._strike.getProfileById(id: id);
+    setState(() {
+      profile = searchProfile;
+    });
+  }
+
+  Future<void> loadUserByHandle(String handle) async {
+    Profile? searchProfile =  await widget._strike.getProfileByHandle(handle: handle);
+    setState(() {
+      profile = searchProfile;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {

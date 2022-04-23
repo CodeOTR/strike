@@ -1,15 +1,19 @@
+import 'package:example/main.dart';
 import 'package:flutter/material.dart';
+import 'package:strike/models/invoice.dart';
+import 'package:strike/models/invoice_amount.dart';
 
 class NewInvoice extends StatefulWidget {
   NewInvoice({Key? key}) : super(key: key);
-
-  final TextEditingController descriptionController = TextEditingController();
 
   @override
   State<NewInvoice> createState() => _NewInvoiceState();
 }
 
 class _NewInvoiceState extends State<NewInvoice> {
+  final TextEditingController descriptionController = TextEditingController();
+  final TextEditingController handleController = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -22,7 +26,12 @@ class _NewInvoiceState extends State<NewInvoice> {
           child: Column(
             children: [
               TextField(
-                controller: widget.descriptionController,
+                decoration: const InputDecoration(hintText: '(Optional) Handle'),
+                controller: handleController,
+              ),
+              TextField(
+                decoration: const InputDecoration(hintText: 'Invoice Description'),
+                controller: descriptionController,
               ),
             ],
           ),
@@ -30,7 +39,17 @@ class _NewInvoiceState extends State<NewInvoice> {
       ),
       floatingActionButton: FloatingActionButton(
         child: const Icon(Icons.send),
-        onPressed: () {},
+        onPressed: () async {
+          Invoice? newInvoice = await strike.issueInvoice(
+            handle: handleController.text,
+            correlationId: null,
+            description: descriptionController.text,
+            invoiceAmount: InvoiceAmount(
+              amount: ,
+              currency: ,
+            ),
+          );
+        },
       ),
     );
   }

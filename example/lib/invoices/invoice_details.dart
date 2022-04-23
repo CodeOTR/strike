@@ -1,4 +1,6 @@
 import 'package:example/app/styles.dart';
+import 'package:example/app/widgets.dart';
+import 'package:example/users/user_search.dart';
 import 'package:flutter/material.dart';
 import 'package:strike/models/invoice.dart';
 
@@ -22,11 +24,22 @@ class InvoiceDetails extends StatelessWidget {
           const Text('ID', style: bold),
           Text(invoice.invoiceId ?? ''),
           const Divider(),
-          const Text('Issuer ID', style: bold),
-          Text(invoice.issuerId ?? ''),
+          DetailsTile(
+            label: 'Issuer ID',
+            value: invoice.issuerId ?? '',
+            onTap: () {
+              Navigator.of(context).push(MaterialPageRoute(
+                builder: (context) => UserSearch(id: invoice.issuerId),
+              ));
+            },
+          ),
           const Divider(),
-          const Text('Receiver ID', style: bold),
-          Text(invoice.receiverId ?? ''),
+          DetailsTile(label: 'Receiver ID', value: invoice.receiverId ?? '',
+            onTap: () {
+              Navigator.of(context).push(MaterialPageRoute(
+                builder: (context) => UserSearch(id: invoice.issuerId),
+              ));
+            },),
           const Divider(),
           const Text('Description', style: bold),
           Text(invoice.description ?? ''),

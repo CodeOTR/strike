@@ -11,7 +11,8 @@ class Invoice {
 
   InvoiceAmount? amount;
 
-  // UNPAID, PAID, PENDING, CANCELLED
+  /// Current state of the invoice
+  /// UNPAID, PAID, PENDING, CANCELLED
   String? state;
 
   @JsonKey(fromJson: getDateFromTimestamp, toJson: getStringFromDateTime)
@@ -21,8 +22,10 @@ class Invoice {
 
   String? description;
 
+  /// ID of your Strike account
   String? issuerId;
 
+  /// ID of the tip receiver
   String? receiverId;
 
   Invoice({
