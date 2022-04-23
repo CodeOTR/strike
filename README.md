@@ -21,8 +21,9 @@ Strike APIs enable you to accept payments securely and integrate your app with [
 - [x] Issue basic invoice 
 - [x] Issue invoice to specific receiver
 - [x] Find invoice by ID
+- [x] Issue quote for invoice
 - [x] Cancel unpaid invoice
-- [ ] Get currency exchange rates
+- [x] Get currency exchange rates
 - [ ] Get webhook events
 - [ ] Find webhook events by ID
 - [ ] Get webhook subscriptions
@@ -63,6 +64,24 @@ await dotenv.load(fileName: '.env');
 
 Strike _strike = Strike(apiKey:dotenv.env['STRIKE_API_KEY']!);
 ```
+
+## Issue an Invoice
+The only thing *required* to issue an invoice is an InvoiceAmount (which includes the quantity and type of currency being requested). All other fields are optional.
+
+### Issue a General Invoice
+```dart
+await strike.issueInvoice(
+	handle: null,
+	correlationId: null,
+	description: null,
+	invoiceAmount: InvoiceAmount(
+		amount: 10,
+		currency: CurrencyType.USD,
+	),
+);
+```
+When you issue an invoice without specifying a receiver, the invoice is created with your own personal Strike ID as both the "Issuer" and the "Receiver".
+
 
 
 ## Support
