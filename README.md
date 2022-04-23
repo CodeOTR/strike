@@ -85,7 +85,7 @@ When you issue an invoice without specifying a receiver, the invoice is created 
 ### Issue an Invoice for Someone Else
 ```dart
 await strike.issueInvoice(
-  handle: '<RECEIVER_HANDLE',
+  handle: '<RECEIVER_HANDLE>',
   correlationId: null,
   description: "Nice work!",
   invoiceAmount: InvoiceAmount(
