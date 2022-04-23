@@ -41,7 +41,9 @@ class _UserSearchState extends State<UserSearch> {
                 suffixIcon: IconButton(
               icon: const Icon(Icons.search),
               onPressed: () async {
-                Profile? searchProfile = await widget._strike.getProfileByHandle(handle: accountController.text);
+                Profile? searchProfile = byHandle
+                    ? await widget._strike.getProfileByHandle(handle: accountController.text)
+                    : await widget._strike.getProfileById(id: accountController.text);
                 setState(() {
                   profile = searchProfile;
                 });
