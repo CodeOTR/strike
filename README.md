@@ -68,6 +68,8 @@ Strike _strike = Strike(apiKey:dotenv.env['STRIKE_API_KEY']!);
 ## Issue an Invoice
 The only thing *required* to issue an invoice is an InvoiceAmount (which includes the quantity and type of currency being requested). All other fields are optional.
 
+Both of the following methods will return the generated Invoice.
+
 ### Issue an Invoice for Yourself
 ```dart
 await strike.issueInvoice(
@@ -93,6 +95,28 @@ await strike.issueInvoice(
      currency: CurrencyType.BTC,
   ),
 );
+```
+
+## Issue a Quote
+Once you have an Invoice, you can generate a quote for it ([source](https://docs.strike.me/use-cases/tipping-platform)).
+
+![Invoice to Quote](https://docs.strike.me/assets/images/tipping-diagram@2x-3505c72116e5aaa4b55682fdccafb4db.png)
+
+```dart
+strike.issueQuoteForInvoice(invoiceId: invoice.invoiceId)
+```
+
+## Generate a QR Code for the Quote
+Each Quote contains an "lnInvoice" field which is the encoded lightning invoice. Using the [qr_flutter](https://pub.dev/packages/qr_flutter) package you can easily turn that field into a QR Code your users can scan.
+
+```dart
+if(quote.lnInvoice != null) {
+  return QrImage(
+    data: quote.lnInvoice!,
+    version: QrVersions.auto,
+    size: 200.0,
+  );
+}
 ```
 
 ## Support
