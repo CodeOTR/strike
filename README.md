@@ -68,21 +68,32 @@ Strike _strike = Strike(apiKey:dotenv.env['STRIKE_API_KEY']!);
 ## Issue an Invoice
 The only thing *required* to issue an invoice is an InvoiceAmount (which includes the quantity and type of currency being requested). All other fields are optional.
 
-### Issue a General Invoice
+### Issue an Invoice for Yourself
 ```dart
 await strike.issueInvoice(
-	handle: null,
-	correlationId: null,
-	description: null,
-	invoiceAmount: InvoiceAmount(
-		amount: 10,
-		currency: CurrencyType.USD,
-	),
+  handle: null,
+  correlationId: null,
+  description: null,
+  invoiceAmount: InvoiceAmount(
+     amount: 10,
+     currency: CurrencyType.USD,
+  ),
 );
 ```
-When you issue an invoice without specifying a receiver, the invoice is created with your own personal Strike ID as both the "Issuer" and the "Receiver".
+When you issue an invoice without specifying a receiver, the invoice is created with your own personal Strike ID as both the "Issuer" and the "Receiver". In other words, when this invoice is paid, you receive the funds.
 
-
+### Issue an Invoice for Someone Else
+```dart
+await strike.issueInvoice(
+  handle: '<RECEIVER_HANDLE',
+  correlationId: null,
+  description: "Nice work!",
+  invoiceAmount: InvoiceAmount(
+     amount: 1,
+     currency: CurrencyType.BTC,
+  ),
+);
+```
 
 ## Support
 [:heart: Sponsor on GitHub](https://github.com/sponsors/jtmuller5) 
