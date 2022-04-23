@@ -42,10 +42,37 @@ Strike APIs enable you to accept payments securely and integrate your app with [
 
 In order to use the Strike API, you will need to [request an API key](https://developer.strike.me/en/).
 
+## Secure your API Key
+You can use the [flutter_dotenv](https://pub.dev/packages/flutter_dotenv "flutter_dotenv") package to keep your API key safely out of public repositories.
+1. Add flutter_dotenv to your pubspec.yaml
+2. Add \*.env to your project's .gitignore file
+3. Create a .env file in the root of your project and add the following contents
+```yaml
+STRIKE_API_KEY=<YOUR_API_KEY>
+```
+4. Add the .env file to the assets section of your pubspec.yaml and run flutter pub get
+```yaml
+assets:
+  - .env
+```
 ## Usage
+Create your Strike instance.
+
+Without flutter_dotenv:
 
 ```dart
 Strike _strike = Strike(apiKey: '<YOUR_API_KEY>');
-
-_strike.getProfileByHandle(handle: 'joemuller');
 ```
+With flutter_dotenv:
+
+```dart
+await dotenv.load(fileName: '.env');
+
+Strike _strike = Strike(apiKey:dotenv.env['STRIKE_API_KEY']!);
+```
+
+
+## Support
+[:heart: Sponsor on GitHub](https://github.com/sponsors/jtmuller5) 
+
+<a href="https://buymeacoffee.com/mullr" target="_blank"><img align="left" src="https://cdn.buymeacoffee.com/buttons/default-orange.png" alt="Buy Me A Coffee" height="41" width="174"></a>
