@@ -1,11 +1,14 @@
-import 'package:dotenv/dotenv.dart';
+import 'package:example/invoices/invoices.dart';
+import 'package:example/invoices/new_invoice.dart';
+import 'package:example/users/user_search.dart';
 import 'package:flutter/material.dart';
 import 'package:strike/strike.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 
 DotEnv? dotEnv;
 
-Future<void> main() async {
-  dotEnv = DotEnv(includePlatformEnvironment: true)..load(['.env']);
+Future<void> main()  async {
+  await dotenv.load(fileName: '.env');
   runApp(const MyApp());
 }
 
@@ -34,8 +37,10 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
+
+
   final Strike _strike = Strike(
-    apiKey: dotEnv!['STRIKE_API_KEY']!,
+    apiKey: dotenv.env['STRIKE_API_KEY']!,
     debugMode: true,
   );
 
@@ -45,24 +50,22 @@ class _MyHomePageState extends State<MyHomePage> {
       appBar: AppBar(
         title: Text(widget.title),
       ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            ElevatedButton(
-              onPressed: () {
-                _strike.getProfileByHandle(handle: 'joemuller');
-              },
-              child: const Text('Get user by handle'),
-            ),
-            ElevatedButton(
-              onPressed: () {
-                _strike.getInvoices();
-              },
-              child: const Text('Get invoices'),
-            ),
-          ],
-        ),
+      body: ListView(
+        children: [
+          ListTile(
+            title: const Text('Invoices'),
+            onTap: (){
+              Navigator.of(context).push(MaterialPageRoute(builder: (context) => const Invoices(),));
+            },
+          ),
+          ListTile(
+            onTap: (){
+              Navigator.of(context).push(MaterialPageRoute(builder: (context) => UserSearch()));
+            },
+            title: const Text('User Search'),
+          ),
+
+        ],
       ),
     );
   }

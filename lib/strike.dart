@@ -8,6 +8,7 @@ import 'package:strike/models/invoice.dart';
 import 'package:strike/models/invoice_amount.dart';
 import 'package:strike/models/profile.dart';
 import 'package:strike/models/quote.dart';
+import 'package:strike/models/strike_event.dart';
 import 'package:strike/models/strike_subscription.dart';
 import 'package:http/http.dart' as http;
 
@@ -27,9 +28,10 @@ class Strike {
   static const String _host = 'https://api.strike.me/v1';
 
   static const Map<StrikeEndpoint, String> endpoints = {
-    StrikeEndpoint.newSubscription: '/subscriptions',
+    StrikeEndpoint.subscriptions: '/subscriptions',
     StrikeEndpoint.invoices: '/invoices',
     StrikeEndpoint.accounts: '/accounts',
+    StrikeEndpoint.events: '/events'
   };
 
   Map<String, String> get _headers {
@@ -144,7 +146,7 @@ class Strike {
   Future<List<Invoice>?> getInvoices() async {
     http.Response response = await _get(strikeEndpoint: endpoints[StrikeEndpoint.invoices]!);
 
-    final List data = jsonDecode(response.body);
+    final List data = jsonDecode(response.body)['items'];
 
     List<Invoice> invoices = [];
 
@@ -253,10 +255,64 @@ class Strike {
   Future<Profile?> getProfileByHandle({required String handle}) async {
     http.Response response = await _get(strikeEndpoint: endpoints[StrikeEndpoint.accounts]! + '/handle/$handle/profile');
 
-    try {
-      final Profile profile = Profile.fromJson(jsonDecode(response.body));
+    if (response.statusCode == 200) {
+      try {
+        final Profile profile = Profile.fromJson(jsonDecode(response.body));
 
-      return profile;
+        return profile;
+      } catch (e) {
+        debugPrint('Strike Error: ' + e.toString());
+      }
+    }
+
+    return null;
+  }
+
+  Future<StrikeEvent?> getEvents() async {
+    http.Response response = await _get(strikeEndpoint: endpoints[StrikeEndpoint.events]!);
+
+    final List data = jsonDecode(response.body)['items'];
+
+    List<StrikeEvent> events = [];
+
+    try {
+      for (var value in data) {
+        StrikeEvent event = StrikeEvent.fromJson(value);
+        events.add(event);
+      }
+    } catch (e) {
+      debugPrint('Strike Error: ' + e.toString());
+    }
+
+    return null;
+  }
+
+  Future<StrikeEvent?> findEventById({required String id}) async {
+    http.Response response = await _get(strikeEndpoint: endpoints[StrikeEndpoint.events]! + '/$id');
+
+    try {
+      final StrikeEvent event = StrikeEvent.fromJson(jsonDecode(response.body));
+
+      return event;
+    } catch (e) {
+      debugPrint('Strike Error: ' + e.toString());
+    }
+
+    return null;
+  }
+
+  Future<StrikeEvent?> getSubscriptions() async {
+    http.Response response = await _get(strikeEndpoint: endpoints[StrikeEndpoint.subscriptions]!);
+
+    final List data = jsonDecode(response.body)['items'];
+
+    List<StrikeEvent> events = [];
+
+    try {
+      for (var value in data) {
+        StrikeEvent event = StrikeEvent.fromJson(value);
+        events.add(event);
+      }
     } catch (e) {
       debugPrint('Strike Error: ' + e.toString());
     }
@@ -266,7 +322,8 @@ class Strike {
 }
 
 enum StrikeEndpoint {
-  newSubscription,
+  subscriptions,
   invoices,
   accounts,
+  events,
 }

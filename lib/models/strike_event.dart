@@ -17,12 +17,15 @@ class StrikeEvent {
 
   bool? deliverySuccess;
 
+  dynamic data;
+
   StrikeEvent({
     this.id,
     this.eventType,
     this.webhookVersion,
     this.created,
     this.deliverySuccess,
+    this.data,
   });
 
   factory StrikeEvent.fromJson(Map<String, dynamic> json) => _$StrikeEventFromJson(json);
