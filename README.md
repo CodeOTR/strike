@@ -11,15 +11,8 @@ and the Flutter guide for
 [developing packages and plugins](https://flutter.dev/developing-packages). 
 -->
 
-This package is a pure Dart SDK wrapper for the Strike APIs.
+This package is a pure Dart SDK wrapper for the Strike APIs ([offical docs](https://docs.strike.me/)).
 Strike APIs enable you to accept payments securely and integrate your app with [Strike](https://strike.me/en/).
-
-## Features
-
-* Find Strike users by ID and handle
-* Issue new invoices
-* Issue quotes for invoices
-* Cancel unpaid invoices
 
 ## Roadmap
 
