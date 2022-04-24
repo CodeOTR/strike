@@ -238,12 +238,14 @@ class Strike {
       strikeEndpoint: endpoints[StrikeEndpoint.invoices]! + '/$invoiceId/cancel',
     );
 
-    try {
-      final Invoice invoice = Invoice.fromJson(jsonDecode(response.body));
+    if(response.statusCode == 200) {
+      try {
+        final Invoice invoice = Invoice.fromJson(jsonDecode(response.body));
 
-      return invoice;
-    } catch (e) {
-      debugPrint('Strike Error: ' + e.toString());
+        return invoice;
+      } catch (e) {
+        debugPrint('Strike Error: ' + e.toString());
+      }
     }
 
     return null;

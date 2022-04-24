@@ -30,7 +30,20 @@ class Invoices extends StatelessWidget {
 
                   return ListTile(
                     title: Text(invoice.invoiceId.toString()),
-                    subtitle: Text((invoice.amount?.amount ?? 0).toString() + ' ' + (invoice.amount?.currency?.name ?? '')),
+                    subtitle: RichText(
+                        text: TextSpan(
+                          style: const TextStyle(color: Colors.black54),
+                          children: [
+                            TextSpan(
+                                text: (invoice.amount?.amount ?? 0).toString() + ' ' + (invoice.amount?.currency?.name ?? '')+' - '
+                            ),
+                            TextSpan(
+                                text: (invoice.state?.name ?? ''),style: TextStyle(color: invoice.state?.stateColor, fontWeight:
+                            FontWeight.w600)
+                            ),
+                          ]
+                        ),
+                        ),
                     onTap: () {
                       Navigator.of(context).push(MaterialPageRoute(
                         builder: (context) => InvoiceDetails(invoice: invoice),
@@ -51,7 +64,7 @@ class Invoices extends StatelessWidget {
         child: const Icon(Icons.add),
         onPressed: () {
           Navigator.of(context).push(MaterialPageRoute(
-            builder: (context) => NewInvoice(),
+            builder: (context) => const NewInvoice(),
           ));
         },
       ),
