@@ -2,6 +2,7 @@ import 'package:json_annotation/json_annotation.dart';
 import 'package:strike/models/exchange_rate.dart';
 import 'package:strike/models/invoice_amount.dart';
 import 'package:strike/utilities/json_utilities.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 part 'quote.g.dart';
 
@@ -25,6 +26,7 @@ class Quote {
   InvoiceAmount? sourceAmount;
 
   ExchangeRate? exchangeRate;
+
 
   Quote({
     this.quoteId,

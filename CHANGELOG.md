@@ -1,3 +1,7 @@
+# 0.0.3
+
+- feat: Open Strike app using Invoice ID
+
 # 0.0.2
 
 - feat: Issue quotes for existing invoices
