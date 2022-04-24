@@ -34,8 +34,9 @@ class _InvoiceDetailsState extends State<InvoiceDetails> {
         title: const Text('Invoice Details'),
       ),
       body: Column(
+        mainAxisSize: MainAxisSize.max,
         children: [
-          Flexible(
+          Expanded(
             flex: 2,
             child: ListView(
               padding: const EdgeInsets.all(16),
@@ -83,32 +84,30 @@ class _InvoiceDetailsState extends State<InvoiceDetails> {
               ],
             ),
           ),
-          Expanded(
-            child: Padding(
-              padding: const EdgeInsets.all(16.0),
-              child: Row(
-                children: [
-                  OutlinedButton(
-                    child: const Text('Cancel'),
-                    onPressed: () async {
-                      Invoice? cancelledInvoice = await strike.cancelUnpaidInvoice(invoiceId: invoice?.invoiceId);
+          Padding(
+            padding: const EdgeInsets.all(16.0),
+            child: Row(
+              children: [
+                OutlinedButton(
+                  child: const Text('Cancel'),
+                  onPressed: () async {
+                    Invoice? cancelledInvoice = await strike.cancelUnpaidInvoice(invoiceId: invoice?.invoiceId);
 
-                      if(cancelledInvoice != null) {
-                        setState(() {
-                          invoice = cancelledInvoice;
-                        });
-                      }
-                    },
-                  ),
-                  gap16,
-                  OutlinedButton(
-                    child: const Text('Generate Quote'),
-                    onPressed: () {
-                      Navigator.of(context).push(MaterialPageRoute(builder: (context) => InvoiceQuote(invoice: invoice!)));
-                    },
-                  ),
-                ],
-              ),
+                    if(cancelledInvoice != null) {
+                      setState(() {
+                        invoice = cancelledInvoice;
+                      });
+                    }
+                  },
+                ),
+                gap16,
+                OutlinedButton(
+                  child: const Text('Generate Quote'),
+                  onPressed: () {
+                    Navigator.of(context).push(MaterialPageRoute(builder: (context) => InvoiceQuote(invoice: invoice!)));
+                  },
+                ),
+              ],
             ),
           )
         ],
