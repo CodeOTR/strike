@@ -44,7 +44,7 @@ class InvoiceQuote extends StatelessWidget {
                     child: OutlinedButton(
                       child: const Text('Open Strike'),
                       onPressed: () {
-                       quote.openStrikeApp();
+                       quote.openStrikeApp(invoiceId: invoice.invoiceId);
                       },
                     ),
                   ),

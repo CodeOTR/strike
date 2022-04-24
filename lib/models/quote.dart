@@ -29,6 +29,7 @@ class Quote {
 
   ExchangeRate? exchangeRate;
 
+  /// Launches the platform-specific app store to the Strike app
   Future<void> openStrikeApp({String? invoiceId}) async {
     if (defaultTargetPlatform == TargetPlatform.android || defaultTargetPlatform == TargetPlatform.iOS) {
       bool launchable = await canLaunchUrl(Uri.parse('lightning:$lnInvoice'));
