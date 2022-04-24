@@ -1,3 +1,7 @@
+# 0.0.4
+
+- feat: Open Strike app using encoded Lightning Invoice
+
 # 0.0.3
 
 - feat: Open Strike app using Invoice ID

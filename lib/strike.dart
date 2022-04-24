@@ -69,7 +69,7 @@ class Strike {
     final response = await http.post(
       Uri.parse(endpoint),
       headers: _headers..addAll(extraHeaders ?? {}),
-      body: body,
+      body: jsonEncode(body),
     );
 
     printResponseData(response, endpoint);
@@ -188,7 +188,7 @@ class Strike {
     required String? description,
     required InvoiceAmount invoiceAmount,
   }) async {
-    String endpoint = endpoints[StrikeEndpoint.invoices]! + (handle != null ? '/handle/$handle' : '');
+    String endpoint = endpoints[StrikeEndpoint.invoices]! + ((handle != null && handle.trim().isNotEmpty) ? '/handle/$handle' : '');
 
     http.Response response = await _post(
       strikeEndpoint: endpoint,

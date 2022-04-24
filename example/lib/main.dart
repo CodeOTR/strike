@@ -5,8 +5,6 @@ import 'package:flutter/material.dart';
 import 'package:strike/strike.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 
-DotEnv? dotEnv;
-
 late final Strike strike;
 
 Future<void> main()  async {
