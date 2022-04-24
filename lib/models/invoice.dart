@@ -3,6 +3,7 @@ import 'package:strike/models/invoice_amount.dart';
 
 import 'package:json_annotation/json_annotation.dart';
 import 'package:strike/utilities/json_utilities.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 part 'invoice.g.dart';
 
@@ -28,6 +29,10 @@ class Invoice {
 
   /// ID of the tip receiver
   String? receiverId;
+
+  void openStrikeApp(){
+    launchUrl(Uri.parse('https://strike.me/pay/$invoiceId'));
+  }
 
   Invoice({
     this.invoiceId,

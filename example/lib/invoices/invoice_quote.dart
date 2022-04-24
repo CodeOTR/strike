@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:qr_flutter/qr_flutter.dart';
 import 'package:strike/models/invoice.dart';
 import 'package:strike/models/quote.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class InvoiceQuote extends StatelessWidget {
   const InvoiceQuote({Key? key, required this.invoice}) : super(key: key);
@@ -39,6 +40,14 @@ class InvoiceQuote extends StatelessWidget {
                       ),
                     ),
                   gap16,
+                  Center(
+                    child: OutlinedButton(
+                      child: const Text('Open Strike'),
+                      onPressed: () {
+                        launchUrl(Uri.parse('https://strike.me/pay/${quote.quoteId}'));
+                      },
+                    ),
+                  ),
                   DetailsTile(label: 'Quote ID', value: quote.quoteId ?? ''),
                   const Divider(),
                   DetailsTile(label: 'Source Amount', value: quote.sourceAmount?.displayAmount() ?? ''),

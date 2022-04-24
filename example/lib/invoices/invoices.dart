@@ -9,7 +9,6 @@ class Invoices extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
     return Scaffold(
       appBar: AppBar(
         title: const Text('Invoices'),
@@ -29,21 +28,17 @@ class Invoices extends StatelessWidget {
                   Invoice invoice = snapshot.data![index];
 
                   return ListTile(
-                    title: Text(invoice.invoiceId.toString()),
+                    title: Text((invoice.description ?? 'No description').toString()),
                     subtitle: RichText(
-                        text: TextSpan(
-                          style: const TextStyle(color: Colors.black54),
-                          children: [
-                            TextSpan(
-                                text: (invoice.amount?.amount ?? 0).toString() + ' ' + (invoice.amount?.currency?.name ?? '')+' - '
-                            ),
-                            TextSpan(
-                                text: (invoice.state?.name ?? ''),style: TextStyle(color: invoice.state?.stateColor, fontWeight:
-                            FontWeight.w600)
-                            ),
-                          ]
-                        ),
-                        ),
+                      text: TextSpan(style: const TextStyle(color: Colors.black54), children: [
+                        TextSpan(text: (invoice.amount?.amount ?? 0).toString() + ' ' + (invoice.amount?.currency?.name ?? '') + ' - '),
+                        TextSpan(text: (invoice.state?.name ?? ''), style: TextStyle(color: invoice.state?.stateColor, fontWeight: FontWeight.w600)),
+                      ]),
+                    ),
+                    trailing: Tooltip(
+                      child: const Icon(Icons.info_outline),
+                      message: invoice.invoiceId,
+                    ),
                     onTap: () {
                       Navigator.of(context).push(MaterialPageRoute(
                         builder: (context) => InvoiceDetails(invoice: invoice),

@@ -4,6 +4,7 @@ import 'package:example/main.dart';
 import 'package:example/users/user_search.dart';
 import 'package:flutter/material.dart';
 import 'package:strike/models/invoice.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class InvoiceDetails extends StatefulWidget {
   const InvoiceDetails({
@@ -34,6 +35,7 @@ class _InvoiceDetailsState extends State<InvoiceDetails> {
         title: const Text('Invoice Details'),
       ),
       body: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
         mainAxisSize: MainAxisSize.max,
         children: [
           Expanded(
@@ -86,7 +88,8 @@ class _InvoiceDetailsState extends State<InvoiceDetails> {
           ),
           Padding(
             padding: const EdgeInsets.all(16.0),
-            child: Row(
+            child: Wrap(
+              alignment: WrapAlignment.start,
               children: [
                 OutlinedButton(
                   child: const Text('Cancel'),
@@ -105,6 +108,13 @@ class _InvoiceDetailsState extends State<InvoiceDetails> {
                   child: const Text('Generate Quote'),
                   onPressed: () {
                     Navigator.of(context).push(MaterialPageRoute(builder: (context) => InvoiceQuote(invoice: invoice!)));
+                  },
+                ),
+                gap16,
+                OutlinedButton(
+                  child: const Text('Open Strike'),
+                  onPressed: () {
+                   invoice?.openStrikeApp();
                   },
                 ),
               ],
