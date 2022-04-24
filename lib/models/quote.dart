@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:json_annotation/json_annotation.dart';
 import 'package:strike/models/exchange_rate.dart';
 import 'package:strike/models/invoice_amount.dart';
@@ -27,6 +28,9 @@ class Quote {
 
   ExchangeRate? exchangeRate;
 
+  void openStrikeApp(String invoiceId){
+   launchUrl(Uri.parse('lightning:$lnInvoice'));
+  }
 
   Quote({
     this.quoteId,

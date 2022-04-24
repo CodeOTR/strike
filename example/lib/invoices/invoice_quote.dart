@@ -40,14 +40,14 @@ class InvoiceQuote extends StatelessWidget {
                       ),
                     ),
                   gap16,
-                /*  Center(
+                  Center(
                     child: OutlinedButton(
                       child: const Text('Open Strike'),
                       onPressed: () {
-                       quote.openStrikeApp();
+                       quote.openStrikeApp(invoice.invoiceId!);
                       },
                     ),
-                  ),*/
+                  ),
                   DetailsTile(label: 'Quote ID', value: quote.quoteId ?? ''),
                   const Divider(),
                   DetailsTile(label: 'Source Amount', value: quote.sourceAmount?.displayAmount() ?? ''),
