@@ -69,7 +69,7 @@ class Strike {
     final response = await http.post(
       Uri.parse(endpoint),
       headers: _headers..addAll(extraHeaders ?? {}),
-      body: utf8.encode(jsonEncode(body)),
+      body: extraHeaders?.keys.contains(HttpHeaders.contentTypeHeader) ?? false ? jsonEncode(body) : body,
     );
 
     printResponseData(response, endpoint);
@@ -87,7 +87,7 @@ class Strike {
     final response = await http.put(
       Uri.parse(endpoint),
       headers: _headers..addAll(extraHeaders ?? {}),
-      body: utf8.encode(jsonEncode(body)),
+      body: extraHeaders?.keys.contains(HttpHeaders.contentTypeHeader) ?? false ? jsonEncode(body) : body,
     );
 
     printResponseData(response, endpoint);
@@ -123,7 +123,7 @@ class Strike {
     final response = await http.delete(
       Uri.parse(endpoint),
       headers: _headers..addAll(extraHeaders ?? {}),
-      body: utf8.encode(jsonEncode(body)),
+      body: extraHeaders?.keys.contains(HttpHeaders.contentTypeHeader) ?? false ? jsonEncode(body) : body,
     );
 
     printResponseData(response, endpoint);
@@ -238,7 +238,7 @@ class Strike {
       strikeEndpoint: endpoints[StrikeEndpoint.invoices]! + '/$invoiceId/cancel',
     );
 
-    if(response.statusCode == 200) {
+    if (response.statusCode == 200) {
       try {
         final Invoice invoice = Invoice.fromJson(jsonDecode(response.body));
 

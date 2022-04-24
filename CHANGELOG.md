@@ -1,3 +1,7 @@
+# 0.0.7
+
+- refactor: Adding utf8 encoding to post body
+
 # 0.0.6
 
 - fix: Adding utf8 encoding to post body

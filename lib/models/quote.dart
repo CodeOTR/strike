@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+import 'package:flutter/foundation.dart';
 import 'package:json_annotation/json_annotation.dart';
 import 'package:strike/models/exchange_rate.dart';
 import 'package:strike/models/invoice_amount.dart';
@@ -28,8 +28,17 @@ class Quote {
 
   ExchangeRate? exchangeRate;
 
-  void openStrikeApp(){
-   launchUrl(Uri.parse('lightning:$lnInvoice'));
+  void openStrikeApp({String? invoiceId}) {
+    if (defaultTargetPlatform == TargetPlatform.android || defaultTargetPlatform == TargetPlatform.iOS) {
+      launchUrl(Uri.parse('lightning:$lnInvoice'));
+    } else {
+      if (invoiceId != null) {
+        launchUrl(
+          Uri.parse('https://strike.me/pay/$invoiceId/lightning:$lnInvoice'),
+          webOnlyWindowName: '_blank',
+        );
+      }
+    }
   }
 
   Quote({
