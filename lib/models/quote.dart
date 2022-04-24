@@ -28,16 +28,35 @@ class Quote {
 
   ExchangeRate? exchangeRate;
 
-  void openStrikeApp({String? invoiceId}) {
-    if (defaultTargetPlatform == TargetPlatform.android || defaultTargetPlatform == TargetPlatform.iOS) {
-      launchUrl(Uri.parse('lightning:$lnInvoice'));
-    } else {
-      if (invoiceId != null) {
-        launchUrl(
-          Uri.parse('https://strike.me/pay/$invoiceId/lightning:$lnInvoice'),
-          webOnlyWindowName: '_blank',
-        );
+  Future<void> openStrikeApp({String? invoiceId}) async {
+    try {
+      if (defaultTargetPlatform == TargetPlatform.android || defaultTargetPlatform == TargetPlatform.iOS) {
+        try {
+          bool launchable = await canLaunchUrl(Uri.parse('lightning:$lnInvoice'));
+          if (launchable) launchUrl(Uri.parse('lightning:$lnInvoice'));
+        } catch (e) {
+          debugPrint('Couldn\'t launch url: ' + e.toString());
+          rethrow;
+        }
+      } else {
+        if (invoiceId != null) {
+          try {
+            bool launchable = await canLaunchUrl(Uri.parse('https://strike.me/pay/$invoiceId/lightning:$lnInvoice'));
+            if (launchable) {
+              launchUrl(
+                Uri.parse('https://strike.me/pay/$invoiceId/lightning:$lnInvoice'),
+                webOnlyWindowName: '_blank',
+              );
+            }
+          } catch (e) {
+            debugPrint('Couldn\'t launch url: ' + e.toString());
+            rethrow;
+          }
+        }
       }
+    } catch (e) {
+      debugPrint('Couldn\'t launch url: ' + e.toString());
+      launchUrl(Uri.parse('https://invite.strike.me/WYJFFO'));
     }
   }
 
