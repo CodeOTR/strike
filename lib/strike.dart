@@ -105,7 +105,7 @@ class Strike {
     final response = await http.patch(
       Uri.parse(endpoint),
       headers: _headers..addAll(extraHeaders ?? {}),
-      body: jsonEncode(body),
+      body: body,
     );
 
     printResponseData(response, endpoint);
