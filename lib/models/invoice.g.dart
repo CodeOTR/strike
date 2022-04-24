@@ -34,5 +34,5 @@ const _$InvoiceStateEnumMap = {
   InvoiceState.UNPAID: 'UNPAID',
   InvoiceState.PAID: 'PAID',
   InvoiceState.PENDING: 'PENDING',
-  InvoiceState.CANCELLEd: 'CANCELLEd',
+  InvoiceState.CANCELLED: 'CANCELLED',
 };

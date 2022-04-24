@@ -49,7 +49,7 @@ enum InvoiceState {
   UNPAID,
   PAID,
   PENDING,
-  CANCELLEd,
+  CANCELLED,
 }
 
 extension Extension on InvoiceState {
@@ -63,7 +63,7 @@ extension Extension on InvoiceState {
         return Colors.green;
       case InvoiceState.PENDING:
         return Colors.orange;
-      case InvoiceState.CANCELLEd:
+      case InvoiceState.CANCELLED:
         return Colors.red;
     }
   }

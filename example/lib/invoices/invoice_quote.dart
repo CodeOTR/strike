@@ -1,3 +1,4 @@
+import 'package:example/app/widgets.dart';
 import 'package:example/main.dart';
 import 'package:flutter/material.dart';
 import 'package:qr_flutter/qr_flutter.dart';
@@ -11,35 +12,57 @@ class InvoiceQuote extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    debugPrint('invoice id: ' + invoice.invoiceId.toString());
     return Scaffold(
-        appBar: AppBar(
-          title: const Text('Quote'),
-        ),
-        body: FutureBuilder(
-                future: strike.issueQuoteForInvoice(invoiceId: invoice.invoiceId),
-                builder: (context, AsyncSnapshot<Quote?> snapshot) {
-                  if (snapshot.connectionState == ConnectionState.waiting) {
-                    return const Center(child: CircularProgressIndicator());
-                  } else {
-                    if (snapshot.data != null) {
+      appBar: AppBar(
+        title: const Text('Quote'),
+      ),
+      body: FutureBuilder(
+        future: strike.issueQuoteForInvoice(invoiceId: invoice.invoiceId),
+        builder: (context, AsyncSnapshot<Quote?> snapshot) {
+          if (snapshot.connectionState == ConnectionState.waiting) {
+            return const Center(child: CircularProgressIndicator());
+          } else {
+            debugPrint('snapshot.data: ' + snapshot.data.toString());
+            if (snapshot.data != null) {
+              Quote quote = snapshot.data!;
 
-                      Quote quote = snapshot.data!;
-
-                      if(quote.lnInvoice != null) {
-                        return QrImage(
-                          data: quote.lnInvoice!,
-                          version: QrVersions.auto,
-                          size: 200.0,
-                        );
-                      }
-                    } else {
-                      return const Center(
-                        child: Text('No Results'),
-                      );
-                    }
-                  }
-                },
-              ),);
-
+              return ListView(
+                padding: const EdgeInsets.all(16),
+                children: [
+                  if (quote.lnInvoice != null)
+                    Center(
+                      child: QrImage(
+                        data: quote.lnInvoice!,
+                        version: QrVersions.auto,
+                        size: 200.0,
+                      ),
+                    ),
+                  gap16,
+                  DetailsTile(label: 'Quote ID', value: quote.quoteId ?? ''),
+                  const Divider(),
+                  DetailsTile(label: 'Source Amount', value: quote.sourceAmount?.displayAmount() ?? ''),
+                  const Divider(),
+                  DetailsTile(label: 'Target Amount', value: quote.targetAmount?.displayAmount() ?? ''),
+                  const Divider(),
+                  DetailsTile(label: 'On-Chain Address', value: quote.onchainAddress ?? ''),
+                  const Divider(),
+                  DetailsTile(label: 'Expiration', value: quote.expiration.toString()),
+                  const Divider(),
+                  DetailsTile(label: 'Expiration in Seconds', value: quote.expirationInSec.toString()),
+                  const Divider(),
+                  DetailsTile(label: 'LN Invoice', value: quote.lnInvoice ?? ''),
+                  const Divider(),
+                ],
+              );
+            } else {
+              return const Center(
+                child: Text('No Results'),
+              );
+            }
+          }
+        },
+      ),
+    );
   }
 }

@@ -12,6 +12,10 @@ class InvoiceAmount {
   @JsonKey(fromJson: getDoubleFromString, toJson: getStringFromDouble)
   double? amount;
 
+  String displayAmount(){
+    return '$amount ${currency?.name}';
+  }
+
   InvoiceAmount({
     this.currency,
     this.amount,

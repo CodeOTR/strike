@@ -69,7 +69,7 @@ class Strike {
     final response = await http.post(
       Uri.parse(endpoint),
       headers: _headers..addAll(extraHeaders ?? {}),
-      body: jsonEncode(body),
+      body: body,
     );
 
     printResponseData(response, endpoint);
@@ -221,6 +221,7 @@ class Strike {
       },
     );
 
+    debugPrint('data: ' + response.body);
     try {
       final Quote quote = Quote.fromJson(jsonDecode(response.body));
 
