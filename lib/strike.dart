@@ -12,6 +12,7 @@ import 'package:strike/models/quote.dart';
 import 'package:strike/models/strike_event.dart';
 import 'package:strike/models/strike_subscription.dart';
 import 'package:http/http.dart' as http;
+import 'package:url_launcher/url_launcher.dart';
 
 class Strike {
   Strike({
@@ -352,6 +353,18 @@ class Strike {
     }
 
     return null;
+  }
+
+  static void openInAppStore() {
+    if (defaultTargetPlatform == TargetPlatform.android) {
+      launchUrl(Uri.parse('https://play.google.com/store/apps/details?id=zapsolutions.strike&hl=en_US&gl=US'));
+    } else if (defaultTargetPlatform == TargetPlatform.iOS) {
+      launchUrl(Uri.parse('https://apps.apple.com/us/app/strike-bitcoin-payments/id1488724463'));
+    } else if (kIsWeb) {
+      launchUrl(Uri.parse('https://chrome.google.com/webstore/detail/strike-bitcoin-payments/ddlakobiikmpnaeakgbdeodclnmiablf'));
+    } else {
+      debugPrint('This Platform is not supported: ${defaultTargetPlatform.name}');
+    }
   }
 }
 
