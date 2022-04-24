@@ -1,3 +1,8 @@
+# 0.0.8
+
+- feat: Added openInAppStore() method to open Strike link in platform specific openInAppStore
+- fix: Updated how quotes open the Strike App
+
 # 0.0.7
 
 - refactor: Adding utf8 encoding to post body
