@@ -137,6 +137,21 @@ Once you have an Invoice, you can generate a quote for it ([source](https://docs
 strike.issueQuoteForInvoice(invoiceId: invoice.invoiceId)
 ```
 
+### Open a Quote in Strike
+
+The URL scheme for lightning payments is "lightning:<LIGHTNING_INVOICE>"
+
+All apps that can accept lightning payment requests can be opened with this URL scheme.
+
+```dart
+OutlinedButton(
+  child: const Text('Open Strike'),
+  onPressed: () {
+   quote.openStrikeApp(); // launchUrl(Uri.parse('lightning:$lnInvoice'));
+  },
+),
+```
+
 ## Generate a QR Code for the Quote
 Each Quote contains an "lnInvoice" field which is the encoded lightning invoice. Using the [qr_flutter](https://pub.dev/packages/qr_flutter) package you can easily turn that field into a QR Code your users can scan.
 
