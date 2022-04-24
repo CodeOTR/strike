@@ -28,7 +28,7 @@ class Quote {
 
   ExchangeRate? exchangeRate;
 
-  void openStrikeApp(String invoiceId){
+  void openStrikeApp(){
    launchUrl(Uri.parse('lightning:$lnInvoice'));
   }
 
