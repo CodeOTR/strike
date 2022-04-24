@@ -43,13 +43,9 @@ class Quote {
         bool launchable = await canLaunchUrl(Uri.parse('https://strike.me/pay/$invoiceId/lightning:$lnInvoice'));
         if (launchable) {
           launchUrl(
-            Uri.parse('lightning:$lnInvoice'),
-            webOnlyWindowName: '_blank',
-          );
-          /*launchUrl(
             Uri.parse('https://strike.me/pay/$invoiceId/lightning:$lnInvoice'),
             webOnlyWindowName: '_blank',
-          );*/
+          );
         } else {
           Strike.openInAppStore();
         }
