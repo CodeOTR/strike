@@ -97,6 +97,13 @@ await strike.issueInvoice(
 );
 ```
 
+### Cancel an Unpaid Invoice
+```dart
+Invoice? cancelledInvoice = await strike.cancelUnpaidInvoice(invoiceId: invoice?.invoiceId);
+```
+
+This endpoint will respond with a 422 error code if the Invoice is already cancelled.
+
 ## Issue a Quote
 Once you have an Invoice, you can generate a quote for it ([source](https://docs.strike.me/use-cases/tipping-platform)).
 
@@ -118,6 +125,7 @@ if(quote.lnInvoice != null) {
   );
 }
 ```
+Note that the generated QR code must be scanned from inside the Strike app. If you scan it outside of the app, it simply opens your note app with the QR contents.
 
 ## Support
 [:heart: Sponsor on GitHub](https://github.com/sponsors/jtmuller5) 
