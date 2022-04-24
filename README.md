@@ -166,6 +166,9 @@ if(quote.lnInvoice != null) {
 ```
 Note that the generated QR code must be scanned from inside the Strike app. If you scan it outside of the app, it simply opens your note app with the QR contents.
 
+## Relevant Issues
+- [https://github.com/flutter/flutter/issues/43809](https://github.com/flutter/flutter/issues/43809)
+
 ## Support
 [:heart: Sponsor on GitHub](https://github.com/sponsors/jtmuller5) 
 
