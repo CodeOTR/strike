@@ -97,6 +97,29 @@ await strike.issueInvoice(
 );
 ```
 
+### Open an Invoice in Strike
+
+The Strike mobile app accepts deep links of the following format: https://strike.me/pay/<INVOICE_ID>
+
+Below is the workflow for using the link:
+1. User opens the link
+2. User see's the invoice's description and amount
+3. User presses "Pay"
+4. The Strike app generates a QR code for the invoice
+
+This package depends on [url_launcher](https://pub.dev/packages/url_launcher). Each Invoice has an openStrikeApp() method that will open the appropriate deep link.
+
+```dart
+OutlinedButton(
+  child: const Text('Open Strike App'),
+  onPressed: () {
+   invoice?.openStrikeApp(); // launchUrl(Uri.parse('https://strike.me/pay/$invoiceId'));
+  },
+),
+```
+
+If you'd rather have the Strike app handle the QR code generation, you can ignore the "Issue a Quote" section below.
+
 ### Cancel an Unpaid Invoice
 ```dart
 Invoice? cancelledInvoice = await strike.cancelUnpaidInvoice(invoiceId: invoice?.invoiceId);
