@@ -69,7 +69,7 @@ class Strike {
     final response = await http.post(
       Uri.parse(endpoint),
       headers: _headers..addAll(extraHeaders ?? {}),
-      body: jsonEncode(body),
+      body: utf8.encode(jsonEncode(body)),
     );
 
     printResponseData(response, endpoint);
@@ -87,7 +87,7 @@ class Strike {
     final response = await http.put(
       Uri.parse(endpoint),
       headers: _headers..addAll(extraHeaders ?? {}),
-      body: jsonEncode(body),
+      body: utf8.encode(jsonEncode(body)),
     );
 
     printResponseData(response, endpoint);
@@ -123,7 +123,7 @@ class Strike {
     final response = await http.delete(
       Uri.parse(endpoint),
       headers: _headers..addAll(extraHeaders ?? {}),
-      body: jsonEncode(body),
+      body: utf8.encode(jsonEncode(body)),
     );
 
     printResponseData(response, endpoint);

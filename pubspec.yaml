@@ -1,6 +1,6 @@
 name: strike
 description: A pure Dart SDK wrapper for the Strike APIs. Strike uses Bitcoin technology to offer instant payments globally, with no added fees. Use Strike to pay your friends, buy goods and services online, make micropayments, tip content creators, as well as buy and sell bitcoin.
-version: 0.0.4
+version: 0.0.6
 repository: https://github.com/jtmuller5/strike
 
 environment:

@@ -1,3 +1,11 @@
+# 0.0.6
+
+- fix: Adding utf8 encoding to post body
+
+# 0.0.5
+
+- fix: Fixing issueInvoice body parsing
+
 # 0.0.4
 
 - feat: Open Strike app using encoded Lightning Invoice
