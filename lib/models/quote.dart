@@ -31,9 +31,11 @@ class Quote {
 
   /// Launches the platform-specific app store to the Strike app
   Future<void> openStrikeApp({String? invoiceId}) async {
+    String intent = kIsWeb ? 'lightning:$lnInvoice' : 'strike:lightning:$lnInvoice';
+
     launchUrl(
-      Uri.parse('strike:lightning:$lnInvoice'),
-      webOnlyWindowName: kIsWeb? '_blank' : null,
+      Uri.parse(intent),
+      webOnlyWindowName: kIsWeb ? '_blank' : null,
     ).onError(
       (error, stackTrace) {
         debugPrint('error: ' + error.toString());
