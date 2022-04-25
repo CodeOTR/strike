@@ -31,7 +31,7 @@ class Quote {
 
   /// Launches the platform-specific app store to the Strike app
   Future<void> openStrikeApp({String? invoiceId}) async {
-    String intent = kIsWeb ? 'lightning:$lnInvoice' : 'strike:lightning:$lnInvoice';
+    String intent = kIsWeb ? 'https://www.keepmylightson.xyz/lightning:$lnInvoice' : 'strike:lightning:$lnInvoice';
 
     launchUrl(
       Uri.parse(intent),
