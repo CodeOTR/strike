@@ -33,8 +33,8 @@ class Quote {
   Future<void> openStrikeApp({String? invoiceId}) async {
     String intent = kIsWeb ? 'lightning:$lnInvoice' : 'strike:lightning:$lnInvoice';
 
-    launchUrl(Uri(scheme: kIsWeb ? 'lightning:' : 'strike:lightning', path: lnInvoice),
-            //Uri.parse(intent),
+    launchUrl(Uri(scheme: kIsWeb ? 'lightning' : 'strike:lightning', path: lnInvoice),
+           // Uri.parse(intent),
             webOnlyWindowName: kIsWeb ? '_blank' : null,
             mode: LaunchMode.externalNonBrowserApplication)
         .onError(
