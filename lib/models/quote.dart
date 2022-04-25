@@ -36,6 +36,7 @@ class Quote {
     launchUrl(
       Uri.parse(intent),
       webOnlyWindowName: kIsWeb ? '_blank' : null,
+      mode: LaunchMode.externalApplication
     ).onError(
       (error, stackTrace) {
         debugPrint('error: ' + error.toString());
