@@ -32,23 +32,21 @@ class Quote {
   /// Launches the platform-specific app store to the Strike app
   Future<void> openStrikeApp({String? invoiceId}) async {
     if (defaultTargetPlatform == TargetPlatform.android || defaultTargetPlatform == TargetPlatform.iOS) {
-      bool launchable = await canLaunchUrl(Uri.parse('lightning:$lnInvoice'));
-      if (launchable) {
-        launchUrl(Uri.parse('lightning:$lnInvoice'));
-      } else {
+      launchUrl(Uri.parse('lightning:$lnInvoice')).onError((error, stackTrace) {
+        debugPrint('error: ' + error.toString());
         Strike.openInAppStore();
-      }
+        return true;
+      });
     } else {
       if (invoiceId != null) {
-        bool launchable = await canLaunchUrl(Uri.parse('https://strike.me/pay/$invoiceId/lightning:$lnInvoice'));
-        if (launchable) {
-          launchUrl(
-            Uri.parse('https://strike.me/pay/$invoiceId/lightning:$lnInvoice'),
-            webOnlyWindowName: '_blank',
-          );
-        } else {
+        launchUrl(
+          Uri.parse('https://strike.me/pay/$invoiceId/lightning:$lnInvoice'),
+          webOnlyWindowName: '_blank',
+        ).onError((error, stackTrace) {
+          debugPrint('error: ' + error.toString());
           Strike.openInAppStore();
-        }
+          return true;
+        });
       }
     }
   }
