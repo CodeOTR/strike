@@ -62,7 +62,7 @@ class _InvoiceDetailsState extends State<InvoiceDetails> {
                   value: widget.invoice.receiverId ?? '',
                   onTap: () {
                     Navigator.of(context).push(MaterialPageRoute(
-                      builder: (context) => UserSearch(id: widget.invoice.issuerId),
+                      builder: (context) => UserSearch(id: widget.invoice.receiverId),
                     ));
                   },
                 ),
