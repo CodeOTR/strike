@@ -25,6 +25,10 @@ Strike APIs enable you to accept payments securely and integrate your app with [
 - [x] Issue quote for invoice
 - [x] Cancel unpaid invoice
 - [x] Get currency exchange rates
+- [x] Open Strike App from Invoice (mobile)
+- [x] Open Strike App from Quote (mobile)
+- [ ] Open Strike App from Invoice (web)
+- [ ] Open Strike App from Quote (web)
 - [ ] Get webhook events
 - [ ] Find webhook events by ID
 - [ ] Get webhook subscriptions
