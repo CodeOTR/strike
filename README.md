@@ -168,6 +168,7 @@ Note that the generated QR code must be scanned from inside the Strike app. If y
 
 ## Relevant Issues
 - [https://github.com/flutter/flutter/issues/43809](https://github.com/flutter/flutter/issues/43809)
+- [https://github.com/flutter/flutter/issues/102608#issuecomment-1110832339](https://github.com/flutter/flutter/issues/102608#issuecomment-1110832339)
 
 ## Support
 [:heart: Sponsor on GitHub](https://github.com/sponsors/jtmuller5) 
