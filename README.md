@@ -15,6 +15,18 @@ This package is a pure Dart SDK wrapper for the Strike APIs ([offical docs](http
 
 Strike APIs enable you to accept payments securely and integrate your app with [Strike](https://invite.strike.me/WYJFFO).
 
+## Support
+<a href="https://buymeacoffee.com/mullr" target="_blank"><img align="left" src="https://cdn.buymeacoffee.com/buttons/default-orange.png" alt="Buy Me A Coffee" height="41" width="174"></a>
+<br>
+<br>
+
+<a href="https://keepmylightson.xyz/support/joemuller" target="_blank"><img align="left" src="https://cdn.jsdelivr.net/gh/jtmuller5/strike/socials/Keep My Lights On BWY.png" alt="Keep My Lights On" height="40" width="200"></a>
+<br>
+<br>
+
+[:heart: Sponsor on GitHub](https://github.com/sponsors/jtmuller5) 
+
+
 ## Roadmap
 
 - [x] Find user profiles by handle
@@ -173,8 +185,3 @@ Note that the generated QR code must be scanned from inside the Strike app. If y
 ## Relevant Issues
 - [https://github.com/flutter/flutter/issues/43809](https://github.com/flutter/flutter/issues/43809)
 - [https://github.com/flutter/flutter/issues/102608#issuecomment-1110832339](https://github.com/flutter/flutter/issues/102608#issuecomment-1110832339)
-
-## Support
-[:heart: Sponsor on GitHub](https://github.com/sponsors/jtmuller5) 
-
-<a href="https://buymeacoffee.com/mullr" target="_blank"><img align="left" src="https://cdn.buymeacoffee.com/buttons/default-orange.png" alt="Buy Me A Coffee" height="41" width="174"></a>
