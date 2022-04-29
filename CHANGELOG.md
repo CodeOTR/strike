@@ -1,3 +1,7 @@
+# 0.0.9
+
+- docs: Added section on how to launch Strike app from browser
+
 # 0.0.8
 
 - feat: Added openInAppStore() method to open Strike link in platform specific openInAppStore
