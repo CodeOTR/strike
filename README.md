@@ -168,6 +168,21 @@ OutlinedButton(
 ),
 ```
 
+At the moment, the Strike browser extension cannot be opened by using launchUrl(). Instead, you will need to use the Link widget from the url_launcher package.
+
+```dart
+Link(
+    target: LinkTarget.blank,
+    uri: Uri.parse('lightning:<LNINVOICE>'),
+    builder: (context, onTap) {
+      return ElevatedButton(
+        onPressed: onTap,
+        child: const Text('Send'),
+      );
+    },
+  );
+```
+
 ## Generate a QR Code for the Quote
 Each Quote contains an "lnInvoice" field which is the encoded lightning invoice. Using the [qr_flutter](https://pub.dev/packages/qr_flutter) package you can easily turn that field into a QR Code your users can scan.
 
